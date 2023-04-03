@@ -21,6 +21,9 @@ section {
 }
 
 body {
+    background: #e8e4e4;
+    font-family: 'Roboto Mono', monospace;
+    min-height: 100vh;
     line-height: 1;
     -ms-text-size-adjust: 100%;
     -moz-text-size-adjust: 100%;
@@ -65,4 +68,10 @@ h5,
 h6 {
     font-weight: inherit;
     font-size: inherit;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
