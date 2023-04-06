@@ -1,10 +1,19 @@
 import { useForm, Controller } from "react-hook-form";
 import TextField from '@mui/material/TextField';
-import Input from '@mui/material/Input';
 import Button from '@mui/material/Button';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
+
+const schema = yup.object({
+  name: yup.string(),
+  password: yup.number(),
+}).required();
 
 export const Login = () => {
-  const { control, handleSubmit } = useForm({
+  const { 
+    control,
+    handleSubmit } = useForm({
+    resolver: yupResolver(schema),
     defaultValues: {
       name: '',
       password: ''
@@ -18,18 +27,32 @@ export const Login = () => {
             <Controller
                 name="name"
                 control={control}
-                render={({ field }) => <TextField fullWidth id="outlined-basic" label="Username" variant="outlined" {...field} />}
+                rules={{
+                  required: 'Name is require field'
+                }}
+                render={({ field, fieldState: {error} }) => (
+                <>
+                  <TextField fullWidth id="outlined-basic" label="Username" variant="outlined" {...field} />
+                  {error && <div style={{color: 'red'}}>{error.message}</div>}
+                </>)}
             />
             <Controller
                 name="password"
                 control={control}
-                render={({ field }) => <TextField fullWidth id="outlined-basic" label="Password" variant="outlined" {...field} />}
+                rules={{
+                  required: 'Name is require field'
+                }}
+                render={({ field, fieldState: {error} }) => (
+                  <>
+                    <TextField fullWidth id="outlined-basic" label="Password" variant="outlined" {...field} />
+                    {error && <div style={{color: 'red'}}>{error.message}</div>}
+                  </>)}
             />
             <Button
                 variant="outlined"
                 type="submit"
             >
-                Primary
+                Login
             </Button>
         </form>
     </div>
